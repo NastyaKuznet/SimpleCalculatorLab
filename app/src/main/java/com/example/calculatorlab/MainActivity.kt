@@ -9,8 +9,6 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    private var wasMessage: Boolean = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -43,10 +41,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun addTextOnScreen(str: String){
         val screen = findViewById<TextView>(R.id.tv_main_view)
-        if(wasMessage){
+        if(!screen.text.contains(Regex("^[0-9\\.\\+\\-\\*\\/]+$"))){
             screen.text = ""
             screen.textSize = 40f
-            wasMessage = false
         }
         screen.append(str)
     }
@@ -74,7 +71,6 @@ class MainActivity : AppCompatActivity() {
             } else{
                 screen.textSize = 20f
                 screen.text = "Я умеею считать только корректные односложные операции... (◉ _ ◉)"
-                wasMessage = true
             }
         }
     }
